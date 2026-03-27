@@ -1,0 +1,25 @@
+# Core dependencies
+torch>=2.0.0
+transformers>=4.43.0
+accelerate>=0.30.0
+bitsandbytes>=0.43.0
+
+# Vision & video processing
+opencv-python>=4.8.0
+pillow>=10.0.0
+
+# Data handling & numerics
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Evaluation metrics
+sacrebleu>=2.4.0
+unbabel-comet>=2.2.0
+
+# Utilities
+tqdm>=4.65.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Optional: for Hugging Face Hub interactions
+huggingface-hub>=0.20.0
