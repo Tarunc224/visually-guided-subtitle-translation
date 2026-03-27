@@ -14,9 +14,9 @@ Translates **English movie subtitles** to **Indian languages** (Bengali, Hindi, 
 - **Sample Data**: Ready-to-run corpora for 4 movies × 5 languages.
 
 ## 📊 Pipeline Overview
-```
-<img src="./images/architecture.png" width="400">
-```
+
+<img src = "./images/architecture.png" width="400">
+
 
 ## 🛠️ Prerequisites
 - Python 3.10+, CUDA 12+ (for GPU acceleration)
