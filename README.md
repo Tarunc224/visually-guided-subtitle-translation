@@ -1,27 +1,43 @@
-# Visually-Guided Subtitle Translation 🧠👁️
+# Visually-Guided Subtitle Translation for Indic Languages
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange)](https://pytorch.org/)
-[![GPU](https://img.shields.io/badge/GPU-Recommended-green)](https://developer.nvidia.com/cuda-downloads)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-Translates **English movie subtitles** to **Indian languages** (Bengali, Hindi, Telugu, Kannada, Tamil) using **visual context** from video frames. Achieves superior performance over text-only baselines through **selective grounding**.
+This repository contains the code and data for the EAMT 2026 paper:  
+**"Towards Visually-Guided Movie Subtitle Translation for Indic Languages"**.
+
+We translate **English movie subtitles** into five low‑resource Indian languages (Bengali, Hindi, Telugu, Kannada, Tamil) by leveraging **visual context** from video frames. Two lightweight grounding strategies are compared, and **oracle selective grounding** (replacing the worst 20–30% of text‑only segments) consistently improves COMET scores while using only a fraction of the visual processing.
+
+---
 
 ## 🎯 Key Features
-- **Visual Descriptions**: Frame-by-frame analysis using **FastVLM**.
-- **Context-Aware Translation**: Qwen2.5 + 5-min sliding window attributes or inter-dialogue summaries.
-- **Selective Fusion**: Replace only the worst ~30% baseline segments with visual-enhanced ones.
-- **Evaluation**: BLEU, chrF++, COMET (WMT22-da) across 20 movie-language pairs.
-- **Sample Data**: Ready-to-run corpora for 4 movies × 5 languages.
+
+- **Visual description extraction** using **FastVLM** (frame‑by‑frame, 1 fps)
+- **Two summarisation methods**:
+  - *Attribute Visual Context (Attr‑VC)* – 5‑minute sliding window summarised into structured tags (setting, gender, honorifics, emotion)
+  - *Inter‑Chunk Visual Summarisation (Inter‑VS)* – free‑text summary of visual gaps between dialogue turns
+- **Zero‑shot translation** with **Qwen‑2.5‑7B‑Instruct** (text‑only vs. visually‑grounded)
+- **Selective grounding** – replace only the worst 20‑30% of baseline segments (oracle study)
+- **Evaluation** – BLEU, chrF++, COMET (wmt22‑comet‑da) on 5 full‑length movies × 5 languages
+
+---
 
 ## 📊 Pipeline Overview
 
-<img src = "./images/architecture.png" width="400">
+![Architecture](./images/architecture.png)
 
+*Figure: Multimodal subtitle translation pipeline. Visual frames are described, summarised, and then passed together with the source subtitle to the translation model.*
+
+---
 
 ## 🛠️ Prerequisites
-- Python 3.10+, CUDA 12+ (for GPU acceleration)
-- ~16GB VRAM for Qwen2.5-7B / Llama-3.1-8B
-- Install: `pip install -r requirements.txt`
+
+- Python 3.10 or higher
+- CUDA 12+ (recommended, with ≥16 GB VRAM for Qwen‑2.5‑7B and Llama‑3.1‑8B)
+- Install dependencies:
+  ```bash
+  pip install -r requirements.txt
 
 **Note**: First run downloads models (~30GB total).
 
@@ -95,6 +111,21 @@ timeline,en_dialogue,predicted_bengali,actual_bengali
 ...
 ```
 
+
+## 📚 Citation
+
+If you use this code, dataset, or build upon our work, please cite:
+
+```bibtex
+
+@article{chintada2026towards,
+  title={Towards Visually-Guided Movie Subtitle Translation for Indic Languages},
+  author={Chintada, Tarun and Singh, Kshetrimayum Boynao and Ekbal, Asif},
+  journal={arXiv preprint arXiv:2605.11993},
+  year={2026}
+}
+```
+
 ## ⚠️ Limitations
 - Requires aligned timestamps + reference translations.
 - Heavy compute (GPU essential for production).
@@ -105,8 +136,4 @@ timeline,en_dialogue,predicted_bengali,actual_bengali
 2. Add your metrics to the results table!
 
 ## 📄 License
-MIT License - see [LICENSE](LICENSE).
-```
-
-
-
+MIT License - see [LICENSE](LICENSE)
